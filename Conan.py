@@ -1,10 +1,18 @@
 import struct
+import os
 
 
 def tamper(student_id):
-  pass
-
-
+  #pass
+  with open ('lenna.bmp','rb+') as f:
+    f.seek(54)
+    for i in range(12):
+      #r=bytes(student_id[i])
+      #r=struct.unpack(student_id[i],temp)
+      #pack_data=struct.pack(student_id[i])
+      f.seek(int(student_id[i]))
+      f.write(b'\x00\x00\x00')
+    
 def detect():
   with open('lenna.bmp', 'rb') as f:
     bmp_file_header = f.read(14)
